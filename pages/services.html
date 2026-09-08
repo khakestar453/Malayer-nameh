@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خدمات ساخت عکس و کلیپ هوش مصنوعی | ملایرنامه</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .price-card { background: var(--parchment-dark); border: 1px solid var(--line); padding: 24px; }
+  .price-card.featured { border: 2px solid var(--clay); }
+  .price-card h3 { font-size: 17px; color: var(--walnut); margin-bottom: 8px; }
+  .price-card .amount { font-size: 22px; color: var(--clay); margin-bottom: 14px; }
+  .price-card ul { list-style: none; font-size: 14px; color: var(--ink-soft); }
+  .price-card li { padding: 4px 0; }
+  form.order { display: flex; flex-direction: column; gap: 14px; max-width: 480px; }
+  form.order input, form.order textarea {
+    font-family: var(--font-body); font-size: 15px; padding: 12px;
+    border: 1px solid var(--line); background: var(--parchment-dark); direction: rtl;
+  }
+  form.order button {
+    background: var(--walnut); color: var(--parchment); border: none;
+    padding: 12px; font-size: 15px; cursor: pointer; font-family: var(--font-body);
+  }
+  @media (max-width: 720px) { .price-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark">ملایرنامه</span>
+      <span class="sub">خدمات ساخت محتوا</span>
+    </div>
+    <nav class="main">
+      <a href="../index.html">صفحه اصلی</a>
+      <a href="#packages">پکیج‌ها</a>
+      <a href="#order">سفارش</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">برای کسب‌وکارهای محلی</div>
+    <h1>عکس و کلیپ تبلیغاتی با هوش مصنوعی</h1>
+    <p class="lede">
+      همان تیمی که پشت روایت‌های تصویری ملایرنامه‌ست، حالا برای معرفی کسب‌وکار شما هم کار می‌کند —
+      از عکس محصول تا کلیپ کوتاه تبلیغاتی.
+    </p>
+  </div>
+</section>
+
+<section class="block" id="packages">
+  <div class="wrap">
+    <div class="block-head"><h2>پکیج‌ها</h2></div>
+    <div class="price-grid">
+      <div class="price-card">
+        <h3>پایه</h3>
+        <div class="amount">۳ عکس محصول</div>
+        <ul><li>سبک عکاسی ساده</li><li>تحویل ۲ روزه</li><li>۱ بار اصلاح</li></ul>
+      </div>
+      <div class="price-card featured">
+        <h3>حرفه‌ای</h3>
+        <div class="amount">۵ عکس + ۱ کلیپ کوتاه</div>
+        <ul><li>هویت بصری اختصاصی</li><li>تحویل ۴ روزه</li><li>۲ بار اصلاح</li></ul>
+      </div>
+      <div class="price-card">
+        <h3>کامل</h3>
+        <div class="amount">کمپین ماهانه</div>
+        <ul><li>محتوای مستمر ماهانه</li><li>مشاوره محتوایی</li><li>پشتیبانی مستقیم</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="order">
+  <div class="wrap">
+    <div class="block-head"><h2>شروع سفارش</h2></div>
+    <form class="order">
+      <input type="text" placeholder="نام کسب‌وکار">
+      <input type="text" placeholder="شماره تماس یا آیدی واتساپ">
+      <textarea rows="4" placeholder="چه محصول یا خدماتی را می‌خواهید معرفی کنید؟"></textarea>
+      <button type="submit">ارسال درخواست</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© خدمات محتوا — ملایرنامه</span>
+  </div>
+</footer>
+
+</body>
+</html>
