@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://khakestar453.github.io/Malayer-nameh/sitemap.xml
