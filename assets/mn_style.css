@@ -217,4 +217,42 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+/* analysis button (floats on every page) */
+.mn-fab{position:fixed;left:16px;bottom:16px;z-index:110;display:flex;align-items:center;gap:10px;padding:12px 22px 12px 18px;border-radius:50px;background:var(--glow);color:#1A2F4C;font-weight:900;font-size:15px;box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 0 3px rgba(26,47,76,.9)}
+.mn-fab::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--glow);animation:mn-ring 2.4s ease-out infinite;pointer-events:none}
+.mn-fab svg{width:24px;height:24px;fill:currentColor}
+.mn-fab:hover{background:#F7BC84}
+@keyframes mn-ring{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.3,1.7);opacity:0}}
+.mn-footer{padding-bottom:92px}
+
+/* home promo cards */
+.mn-duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.mn-promo{padding:26px;border:1px solid var(--line);border-radius:var(--r);background:rgba(58,48,44,.5);display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.mn-promo h2{font-size:28px}
+.mn-promo p{color:var(--ink-dim);margin-bottom:12px;flex:1}
+.mn-promo-hot{border-color:var(--glow);background:linear-gradient(135deg,rgba(242,166,90,.16),rgba(58,48,44,.5))}
+.mn-promo-img{width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:8px}
+
+/* about / analysis text pages */
+.mn-prose{max-width:760px}
+.mn-prose-sec{margin-bottom:30px}
+.mn-prose-sec h2{font-size:30px;margin-bottom:6px}
+.mn-prose-sec p{margin-bottom:14px;font-size:16.5px}
+.mn-list{padding-inline-start:24px;margin-bottom:10px}
+.mn-list li{margin-bottom:8px}
+.mn-svc .mn-more{display:inline-block;margin-top:10px;color:var(--glow);font-weight:700;font-size:14px}
+.mn-note{margin-top:20px;color:var(--ink-dim);border-right:3px solid var(--gold);padding-right:16px;max-width:640px;font-size:14.5px}
+
+.mn-lead2{font-size:18px;color:var(--glow);margin-bottom:22px;max-width:640px}
+
+/* poster showcase */
+.mn-posters{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px;align-items:start}
+.mn-poster{border:3px solid var(--gold);border-radius:14px;overflow:hidden;background:var(--shade);box-shadow:0 14px 34px rgba(0,0,0,.38)}
+.mn-poster img{width:100%;height:auto}
+.mn-poster figcaption{padding:10px 14px;font-size:13.5px;color:var(--ink-dim)}
+.mn-poster figcaption b{color:var(--glow);margin-inline-end:6px}
+
+@media(max-width:900px){.mn-duo{grid-template-columns:1fr}}
+@media(max-width:620px){.mn-fab{left:12px;bottom:12px;padding:11px 18px 11px 15px;font-size:14px}.mn-posters{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media(prefers-reduced-motion:reduce){.mn-fab::after{animation:none}}
 @counter-style persian{system:numeric;symbols:"۰" "۱" "۲" "۳" "۴" "۵" "۶" "۷" "۸" "۹"}
