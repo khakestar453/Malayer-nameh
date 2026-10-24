@@ -11,6 +11,48 @@
     document.querySelectorAll('.mn-dd[open]').forEach(function (d) { if (!d.contains(e.target)) d.removeAttribute('open'); });
   });
 
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* hero slider */
+  var sl = document.querySelector('[data-slider]');
+  if (sl) {
+    var slides = [].slice.call(sl.querySelectorAll('.mn-slide')), dots = [].slice.call(sl.querySelectorAll('.mn-sdot')), cur2 = 0, timer = null;
+    var show = function (n) {
+      cur2 = (n + slides.length) % slides.length;
+      slides.forEach(function (s, i) { s.classList.toggle('active', i === cur2); s.tabIndex = i === cur2 ? 0 : -1; });
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === cur2); });
+    };
+    var stop = function () { if (timer) { clearInterval(timer); timer = null; } };
+    var go = function () { stop(); if (!calm && slides.length > 1) timer = setInterval(function () { show(cur2 + 1); }, 5500); };
+    dots.forEach(function (d, i) { d.addEventListener('click', function () { show(i); go(); }); });
+    sl.addEventListener('mouseenter', stop); sl.addEventListener('mouseleave', go);
+    sl.addEventListener('focusin', stop); sl.addEventListener('focusout', go);
+    var x0 = null;
+    sl.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+    sl.addEventListener('touchend', function (e) {
+      if (x0 !== null) { var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(cur2 + (dx < 0 ? 1 : -1)); }
+      x0 = null; go();
+    }, { passive: true });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else go(); });
+    go();
+  }
+
+  /* scroll-in for cards */
+  var rv = [].slice.call(document.querySelectorAll('.mn-card,.mn-cat,.mn-promo,.mn-poster'));
+  if (rv.length) {
+    if (!('IntersectionObserver' in window) || calm) { rv.forEach(function (n) { n.classList.add('in'); }); }
+    else {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+      rv.forEach(function (n) {
+        var sib = [].indexOf.call(n.parentNode.children, n);
+        n.style.setProperty('--i', sib % 5);
+        io.observe(n);
+      });
+    }
+  }
+
   /* search (home page) */
   var q = document.getElementById('mn-q'), res = document.getElementById('mn-res'), idx = null;
   function norm(s) { return (s || '').replace(/[يى]/g, 'ی').replace(/ك/g, 'ک').replace(/[\u200c\u064B-\u0652]/g, '').toLowerCase(); }

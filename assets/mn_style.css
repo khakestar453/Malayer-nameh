@@ -217,6 +217,29 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+/* hero slider: the three newest narrations take turns */
+.mn-slider{display:grid;max-width:380px;width:100%;justify-self:center}
+.mn-slider .mn-slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility .9s}
+.mn-slider .mn-slide.active{opacity:1;visibility:visible}
+.mn-slider .mn-slide.active .mn-arch{animation:mn-float 7s ease-in-out infinite}
+.mn-sdots{grid-area:2/1;display:flex;gap:10px;justify-content:center;margin-top:14px}
+.mn-sdot{width:11px;height:11px;border-radius:50%;background:rgba(229,211,179,.4);transition:background .3s,width .3s}
+.mn-sdot.active{background:var(--glow);width:30px;border-radius:6px}
+@keyframes mn-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* hover (mouse only) and scroll-in motion */
+@media(hover:hover){
+  .mn-card .mn-arch{transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .45s}
+  .mn-card:hover .mn-arch,.mn-card:focus-visible .mn-arch{transform:translateY(-8px) scale(1.04) rotate(-1.2deg);box-shadow:0 22px 44px rgba(242,166,90,.28)}
+  .mn-arch-in>img{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+  .mn-card:hover .mn-arch-in>img{transform:scale(1.08)}
+  .mn-cat:hover,.mn-promo:hover{transform:translateY(-4px)}
+}
+.mn-cat,.mn-promo{transition:transform .35s,border-color .3s,background .3s}
+.js .mn-card,.js .mn-cat,.js .mn-promo,.js .mn-poster{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;transition-delay:calc(var(--i,0) * 70ms)}
+.js .mn-card.in,.js .mn-cat.in,.js .mn-promo.in,.js .mn-poster.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js .mn-card,.js .mn-cat,.js .mn-promo,.js .mn-poster{opacity:1;transform:none}.mn-slider .mn-slide.active .mn-arch{animation:none}}
+
 /* analysis button (floats on every page) */
 .mn-fab{position:fixed;left:16px;bottom:16px;z-index:110;display:flex;align-items:center;gap:10px;padding:12px 22px 12px 18px;border-radius:50px;background:var(--glow);color:#1A2F4C;font-weight:900;font-size:15px;box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 0 3px rgba(26,47,76,.9)}
 .mn-fab::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--glow);animation:mn-ring 2.4s ease-out infinite;pointer-events:none}
