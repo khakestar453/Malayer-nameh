@@ -81,34 +81,49 @@
     document.addEventListener('click', function (e) { if (!q.parentNode.contains(e.target)) res.hidden = true; });
   }
 
-  /* music player */
+  /* music player (songs may be split into group tabs) */
   var box = document.getElementById('mn-player');
   if (!box || !window.MN_SONGS) return;
-  var songs = window.MN_SONGS, audio = new Audio(), cur = -1;
+  var songs = window.MN_SONGS, groups = window.MN_GROUPS || [], grp = groups.length ? groups[0].slug : null;
+  var audio = new Audio(), cur = -1;
   audio.preload = 'none';
   var $ = function (id) { return document.getElementById(id); };
   var seek = $('mn-seek'), msg = $('mn-msg'), ico = $('mn-ico').querySelector('path');
   var PLAY = 'M8 5v14l11-7z', PAUSE = 'M6 5h4v14H6zM14 5h4v14h-4z';
   function fmt(t) { if (!isFinite(t)) return '0:00'; var m = Math.floor(t / 60), s = Math.floor(t % 60); return m + ':' + (s < 10 ? '0' : '') + s; }
+  function ids() { var r = []; songs.forEach(function (s, i) { if (!grp || s.g === grp) r.push(i); }); return r; }
   function pick(i, go) {
-    if (!songs.length) return;
-    cur = (i + songs.length) % songs.length;
+    if (!songs.length || i === undefined) return;
+    cur = i;
     var s = songs[cur]; msg.textContent = ''; audio.src = s.src;
     $('mn-now').textContent = s.title; $('mn-now-s').textContent = s.style;
     seek.value = 0; $('mn-tc').textContent = '0:00'; $('mn-td').textContent = '0:00';
+    var dl = $('mn-dl'); if (dl) { dl.hidden = !s.dl; if (s.dl) { dl.href = s.src; dl.setAttribute('download', s.src.split('/').pop()); } }
     document.querySelectorAll('.mn-track').forEach(function (t) { t.classList.toggle('active', +t.dataset.i === cur); });
     if (go) audio.play().catch(function () {});
   }
+  function step(d) {
+    var l = ids(); if (!l.length) return;
+    var p = l.indexOf(cur); if (p < 0) p = d > 0 ? -1 : 0;
+    pick(l[(p + d + l.length) % l.length], true);
+  }
+  function showGroup(slug) {
+    grp = slug;
+    document.querySelectorAll('.mn-gtab').forEach(function (t) { t.classList.toggle('active', t.dataset.g === slug); });
+    document.querySelectorAll('.mn-track').forEach(function (t) { t.hidden = !!slug && t.dataset.g !== slug; });
+    if (audio.paused && ids().indexOf(cur) < 0) pick(ids()[0], false);
+  }
+  document.querySelectorAll('.mn-gtab').forEach(function (t) { t.addEventListener('click', function () { showGroup(t.dataset.g); }); });
   document.querySelectorAll('.mn-track').forEach(function (t) { t.addEventListener('click', function () { pick(+t.dataset.i, true); }); });
-  $('mn-play').addEventListener('click', function () { if (cur < 0) pick(0, true); else if (audio.paused) audio.play().catch(function () {}); else audio.pause(); });
-  $('mn-prev').addEventListener('click', function () { pick(cur < 0 ? 0 : cur - 1, true); });
-  $('mn-next').addEventListener('click', function () { pick(cur < 0 ? 0 : cur + 1, true); });
+  $('mn-play').addEventListener('click', function () { if (cur < 0) pick(ids()[0], true); else if (audio.paused) audio.play().catch(function () {}); else audio.pause(); });
+  $('mn-prev').addEventListener('click', function () { step(-1); });
+  $('mn-next').addEventListener('click', function () { step(1); });
   audio.addEventListener('play', function () { box.classList.add('playing'); ico.setAttribute('d', PAUSE); $('mn-play').setAttribute('aria-label', 'توقف'); });
   audio.addEventListener('pause', function () { box.classList.remove('playing'); ico.setAttribute('d', PLAY); $('mn-play').setAttribute('aria-label', 'پخش'); });
   audio.addEventListener('loadedmetadata', function () { $('mn-td').textContent = fmt(audio.duration); });
   audio.addEventListener('timeupdate', function () { $('mn-tc').textContent = fmt(audio.currentTime); if (audio.duration) seek.value = audio.currentTime / audio.duration * 1000; });
-  audio.addEventListener('ended', function () { pick(cur + 1, true); });
+  audio.addEventListener('ended', function () { step(1); });
   audio.addEventListener('error', function () { box.classList.remove('playing'); msg.textContent = 'فایل صوتی پیدا نشد. نام فایل را در mn_music.txt بررسی کن.'; });
   seek.addEventListener('input', function () { if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration; });
-  if (songs.length) pick(0, false);
+  if (songs.length) pick(ids()[0], false);
 })();
