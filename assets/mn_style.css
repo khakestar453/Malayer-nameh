@@ -305,3 +305,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .mn-fabs-list{position:absolute;bottom:58px;left:0;display:flex;flex-direction:column;gap:8px;min-width:170px}
 .mn-fabs-list a{padding:11px 16px;border-radius:14px;background:#1A2F4C;color:#E5D3B3;border:1.5px solid #B8860B;text-decoration:none;text-align:center;font-weight:600}
 @media(max-width:620px){.mn-fabs{left:12px;bottom:12px}.mn-fabs summary{padding:10px 16px;font-size:14px}}
+.mn-card.mn-dim,.mn-src.mn-dim{opacity:.6}
+.mn-src{padding:16px 18px;margin:12px 0;border:1px solid #B8860B;border-radius:16px;background:rgba(255,255,255,.04)}
+.mn-src h3{margin:0 0 6px}
+.mn-src p{margin:0 0 10px;opacity:.85}
