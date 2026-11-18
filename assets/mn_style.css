@@ -309,3 +309,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .mn-src{padding:16px 18px;margin:12px 0;border:1px solid #B8860B;border-radius:16px;background:rgba(255,255,255,.04)}
 .mn-src h3{margin:0 0 6px}
 .mn-src p{margin:0 0 10px;opacity:.85}
+.mn-poem{max-width:640px;margin:0 auto;padding:44px 22px 28px;border:1.5px solid #B8860B;border-radius:140px 140px 20px 20px;background:rgba(255,255,255,.04)}
+.mn-bayt{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:16px 0;line-height:2.1;font-size:18px}
+@media(max-width:560px){.mn-bayt{grid-template-columns:1fr;gap:0;margin:20px 0}.mn-poem{border-radius:90px 90px 18px 18px}}
+.mn-pnav{display:flex;justify-content:space-between;gap:12px;margin:24px 0}
+.mn-pnav a{padding:10px 18px;border:1.5px solid #B8860B;border-radius:999px;text-decoration:none;color:inherit}
+.mn-gl{display:grid;gap:8px;margin-top:16px}
+.mn-gl a{padding:11px 16px;border:1px solid #B8860B;border-radius:12px;text-decoration:none;color:inherit}
+.mn-search{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid #B8860B;background:transparent;color:inherit;font:inherit;box-sizing:border-box}
