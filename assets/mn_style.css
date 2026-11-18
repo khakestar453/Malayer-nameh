@@ -317,3 +317,5 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .mn-gl{display:grid;gap:8px;margin-top:16px}
 .mn-gl a{padding:11px 16px;border:1px solid #B8860B;border-radius:12px;text-decoration:none;color:inherit}
 .mn-search{width:100%;padding:12px 16px;border-radius:12px;border:1.5px solid #B8860B;background:transparent;color:inherit;font:inherit;box-sizing:border-box}
+.mn-band{margin:22px 0;padding:12px 0 4px;border-top:1px dashed rgba(184,134,11,.5)}
+.mn-band span{display:block;line-height:2.1;font-size:18px}
