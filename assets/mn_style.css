@@ -327,3 +327,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .mn-article h2{margin:34px 0 8px;font-size:24px}
 .mn-article p{line-height:2.2;font-size:18px;margin:0 0 16px}
 .mn-src h3 a{text-decoration:none;color:inherit}
+.mn-poet{display:flex;gap:18px;align-items:flex-start;margin:0 0 24px;padding:18px;border:1.5px solid #B8860B;border-radius:22px;background:rgba(255,255,255,.04)}
+.mn-poet-ph{width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid #B8860B;flex:none}
+.mn-poet-tx{flex:1}.mn-poet-tx h2{margin:0 0 6px}.mn-poet-tx p{margin:0 0 10px;line-height:2}
+.mn-poet-cv{width:120px;height:auto;border-radius:8px;flex:none}
+.mn-gl-poets a{display:flex;align-items:center;gap:14px}.mn-poet-sm{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none}
+@media(max-width:620px){.mn-poet{flex-direction:column;align-items:center;text-align:center}.mn-poet-cv{width:150px}}
